@@ -1,6 +1,7 @@
 package org.example.backend.Employee;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -10,12 +11,11 @@ public class EmployeeService {
 
     public EmployeeService(EmployeeRepo employeeRepo){
         this.employeeRepo = employeeRepo;
-        /*
-        Employee testEmployeeOne = new Employee("Martin", "Mensch", 30,ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA);
-        Employee testEmployeeTwo = new Employee("Martina", "Mensch", 28,ExecutiveOrEmployee.EXECUTIVE,EmployeeProfession.APOTHEKER);
+
+        Employee testEmployeeOne = new Employee("Martin", "Mensch", 31,ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA, LocalDate.of(1995,2,1));
+        Employee testEmployeeTwo = new Employee("Martina", "Mensch", 28,ExecutiveOrEmployee.EXECUTIVE,EmployeeProfession.APOTHEKER, LocalDate.of(1998,2,1));
         employeeRepo.save(testEmployeeOne);
         employeeRepo.save(testEmployeeTwo);
-        */
 
     }
 
