@@ -10,11 +10,13 @@ public class EmployeeService {
 
     public EmployeeService(EmployeeRepo employeeRepo){
         this.employeeRepo = employeeRepo;
-
-       /* Employee testEmployeeOne = new Employee("Martin", "Mensch", 30);
-        Employee testEmployeeTwo = new Employee("Martina", "Mensch", 28);
+        /*
+        Employee testEmployeeOne = new Employee("Martin", "Mensch", 30,ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA);
+        Employee testEmployeeTwo = new Employee("Martina", "Mensch", 28,ExecutiveOrEmployee.EXECUTIVE,EmployeeProfession.APOTHEKER);
         employeeRepo.save(testEmployeeOne);
-        employeeRepo.save(testEmployeeTwo);*/
+        employeeRepo.save(testEmployeeTwo);
+        */
+
     }
 
 
