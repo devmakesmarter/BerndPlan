@@ -14,7 +14,47 @@ public class Employee {
    private EmployeeProfession  employeeProfession;
    private LocalDate birthDate;
 
-   public Employee(String firstName, String lastName, ExecutiveOrEmployee executiveOrEmployee, EmployeeProfession employeeProfession, LocalDate birthDate){
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public ExecutiveOrEmployee getExecutiveOrEmployee() {
+        return executiveOrEmployee;
+    }
+
+    public void setExecutiveOrEmployee(ExecutiveOrEmployee executiveOrEmployee) {
+        this.executiveOrEmployee = executiveOrEmployee;
+    }
+
+    public EmployeeProfession getEmployeeProfession() {
+        return employeeProfession;
+    }
+
+    public void setEmployeeProfession(EmployeeProfession employeeProfession) {
+        this.employeeProfession = employeeProfession;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Employee(String firstName, String lastName, ExecutiveOrEmployee executiveOrEmployee, EmployeeProfession employeeProfession, LocalDate birthDate){
 
        this.firstName = firstName;
        this.lastName = lastName;
@@ -25,9 +65,14 @@ public class Employee {
 
    public Employee(){
    }
+
+
+
+
+
    // Hier ist eine potenzielle Fehlerquelle ich muss noch prüfen, ob ein Minus dran ist.
    public long getAge(){
-        return ChronoUnit.YEARS.between(LocalDate.now(), birthDate);
+        return ChronoUnit.YEARS.between(birthDate,LocalDate.now() );
    }
 
 }
