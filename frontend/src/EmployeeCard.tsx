@@ -27,19 +27,4 @@ export default function EmployeeCard(props: TypeEmployee){
 
 
 
-    {/*
-            <div className="m-6 rounded-xl bg-blue-200 p-6 text-xl font-bold text-red-700 shadow-lg" >
-            <div>{props.firstName}</div>
-            <div>{props.lastName}</div>
-            <div>{props.birthDate}</div>
-            <div>{props.age}</div>
-            <div>{props.employeeProfession}</div>
-            <div>{props.executiveOrEmployee}</div>
-            </div>
-
-
-            */}
-
-
-
 }
