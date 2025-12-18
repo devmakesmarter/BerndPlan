@@ -17,6 +17,7 @@ class EmployeeTest {
         testEmployee.setEmployeeProfession(EmployeeProfession.APOTHEKER);
         testEmployee.setExecutiveOrEmployee(ExecutiveOrEmployee.EMPLOYEE);
         testEmployee.setBirthDate(LocalDate.of(1990,01,01));
+        testEmployee.setId("1");
 
         assertEquals(35,testEmployee.getAge());
         assertEquals( "Ismail",testEmployee.getFirstName());
@@ -24,7 +25,7 @@ class EmployeeTest {
         assertEquals(EmployeeProfession.APOTHEKER,testEmployee.getEmployeeProfession());
         assertEquals(ExecutiveOrEmployee.EMPLOYEE,testEmployee.getExecutiveOrEmployee());
         assertEquals(LocalDate.of(1990,01,01), testEmployee.getBirthDate());
-
+        assertEquals(testEmployee.getId(), "1");
 
     }
 
