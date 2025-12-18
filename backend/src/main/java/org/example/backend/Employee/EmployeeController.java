@@ -1,7 +1,5 @@
 package org.example.backend.Employee;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,14 @@ public class EmployeeController {
     }
 
 
+
+
+    @PostMapping("/add")
+    public Employee addEmployee(@RequestBody EmployeeDTO employeeDTO){
+
+        return  employeeService.addEmployee(employeeDTO);
+
+    }
 
 
 
