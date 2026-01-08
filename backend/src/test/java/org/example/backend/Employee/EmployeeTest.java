@@ -19,7 +19,7 @@ class EmployeeTest {
         testEmployee.setBirthDate(LocalDate.of(1990,01,01));
         testEmployee.setId("1");
 
-        assertEquals(35,testEmployee.getAge());
+        assertEquals(36,testEmployee.getAge());
         assertEquals( "Ismail",testEmployee.getFirstName());
         assertEquals("Ismail", testEmployee.getLastName());
         assertEquals(EmployeeProfession.APOTHEKER,testEmployee.getEmployeeProfession());

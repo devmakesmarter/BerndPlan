@@ -10,5 +10,14 @@ type employeeProfession = "APOTHEKER" | "PTA" | "PKA" | "HILFSKRAFT" | "AUSZUBIL
     executiveOrEmployee: executiveOrEmployee,
     employeeProfession: employeeProfession,
     birthDate: string
+    id: string
 
+}
+
+export type EmployeeToAdd ={
+    firstName: string,
+    lastName: string,
+    executiveOrEmployee: string,
+    employeeProfession: string,
+    birthDate: string
 }
