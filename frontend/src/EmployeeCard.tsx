@@ -6,7 +6,7 @@ export default function EmployeeCard(props: TypeEmployee){
 
         return(
             <>
-                <div className="bg-gray-400 w-60 p-2 bg-gray-400 rounded-lg" >
+                <div className="bg-red-400 w-60 p-2 bg-gray-400 rounded-lg" >
                     <div className="img_for_employee bg-blue-500">
                         <img src={employeeImage}  />
                     </div>
@@ -16,6 +16,7 @@ export default function EmployeeCard(props: TypeEmployee){
                             <p>{props.age}</p>
                         </div>
                         <h5>{props.employeeProfession} - {props.executiveOrEmployee}</h5>
+                        <button>Bearbeiten</button>
                     </div>
 
                 </div>

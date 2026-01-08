@@ -2,7 +2,8 @@ import type {TypeEmployee} from "./types/TypeEmployee.ts";
 import  axios from "axios";
 import {useEffect, useState} from "react";
 import EmployeeCard from "./EmployeeCard.tsx";
-import {Form} from "react-router-dom";
+
+import EmployeeAddCard from "./EmployeeAddCard.tsx";
 
 
 
@@ -26,7 +27,10 @@ export default function EmployeeOverview(){
             <div className="mainContianer bg-amber-300">
             <form>Searchbar </form>
             <div className="flex gap-4 ">
-                {employees.map(e => <EmployeeCard firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
+                {employees.map(e => <EmployeeCard key={e.id} id={e.id} firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
+            </div>
+            <div>
+               <EmployeeAddCard/>
             </div>
             </div>
         </>
