@@ -5,10 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class EmployeeServiceTest {
 
@@ -47,7 +48,21 @@ class EmployeeServiceTest {
 
         assertEquals(testEmployeeOne,actual);
 
+    }
 
+
+    @Test
+    void updateEmployee_ShouldReturnEmployee_WhenCalledWithEmployeeAndId(){
+        EmployeeRepo mockTestRepo = mock(EmployeeRepo.class);
+        EmployeeIdService mockTestIdService = mock(EmployeeIdService.class);
+        EmployeeService testEmployeeService = new EmployeeService(mockTestRepo,mockTestIdService);
+        Employee testEmployeeOne = new Employee("Klaus", "Testmensch", ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA, LocalDate.of(1995,2,1),"1");
+        String id = "1";
+        when(mockTestRepo.save(testEmployeeOne)).thenReturn(testEmployeeOne);
+
+        Employee actual = testEmployeeService.updateEmployee(testEmployeeOne,id);
+
+        assertEquals(testEmployeeOne,actual);
 
 
 
@@ -55,6 +70,48 @@ class EmployeeServiceTest {
     }
 
 
+
+    @Test
+    void findEmployeeById_withValidId_shouldReturnEmployee(){
+
+        //GIVEN
+        EmployeeRepo mockTestRepo = mock(EmployeeRepo.class);
+        EmployeeIdService mockTestIdService = mock(EmployeeIdService.class);
+        EmployeeService testEmployeeService = new EmployeeService(mockTestRepo, mockTestIdService);
+        String id = "1";
+        Employee testEmployeeOne = new Employee("Klaus", "Testmensch", ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA, LocalDate.of(1995,2,1),"1");
+        when(mockTestRepo.findById(id)).thenReturn(Optional.ofNullable(testEmployeeOne));
+
+        //WHEN
+
+        Employee actual = testEmployeeService.findEmployeeById(id);
+
+        //THEN
+
+        verify(mockTestRepo).findById(id);
+        assertEquals(testEmployeeOne,actual);
+
+    }
+
+    @Test
+    void findEmployeeById_withWrongId_shouldThrowException(){
+        EmployeeRepo mockTestRepo = mock(EmployeeRepo.class);
+        EmployeeIdService mockTestIdService = mock(EmployeeIdService.class);
+        EmployeeService testEmployeeService = new EmployeeService(mockTestRepo, mockTestIdService);
+        String id = "1";
+        Employee testEmployeeOne = new Employee("Klaus", "Testmensch", ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA, LocalDate.of(1995,2,1),"1");
+        when(mockTestRepo.findById(id)).thenReturn(Optional.empty());
+
+        //WHEN
+        assertThrows(NoSuchElementException.class,()-> testEmployeeService.findEmployeeById(id));
+
+
+        //THEN
+
+        verify(mockTestRepo).findById(id);
+
+
+    }
 
 
 

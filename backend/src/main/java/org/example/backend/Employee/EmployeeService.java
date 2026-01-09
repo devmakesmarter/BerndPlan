@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @Service
@@ -13,12 +14,7 @@ public class EmployeeService {
     public EmployeeService(EmployeeRepo employeeRepo, EmployeeIdService employeeIdService){
         this.employeeRepo = employeeRepo;
         this.employeeIdService = employeeIdService;
-        /*
-        Employee testEmployeeOne = new Employee("Martin", "Mensch", ExecutiveOrEmployee.EMPLOYEE, EmployeeProfession.PTA, LocalDate.of(1995,2,1), employeeIdService.generateId());
-        Employee testEmployeeTwo = new Employee("Martina", "Mensch", ExecutiveOrEmployee.EXECUTIVE,EmployeeProfession.APOTHEKER, LocalDate.of(1998,2,1), employeeIdService.generateId());
-        employeeRepo.save(testEmployeeOne);
-        employeeRepo.save(testEmployeeTwo);
-        */
+
     }
 
 
@@ -33,6 +29,19 @@ public class EmployeeService {
         employeeRepo.save(employeeToAdd);
         return employeeToAdd;
 
+    }
+
+    public Employee updateEmployee(Employee employee, String id){
+
+        Employee employeeToUpdate = new Employee(employee.getFirstName(),employee.getLastName(),employee.getExecutiveOrEmployee(),employee.getEmployeeProfession(),employee.getBirthDate(),id);
+        employeeRepo.save(employeeToUpdate);
+        return employeeToUpdate;
+    }
+
+    public Employee findEmployeeById(String id){
+
+        Employee employeeFindById = employeeRepo.findById(id).orElseThrow(()-> new NoSuchElementException("Todo with id: " + id + "not fund"));
+        return employeeFindById;
     }
 
 
