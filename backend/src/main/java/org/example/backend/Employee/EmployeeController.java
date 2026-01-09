@@ -1,7 +1,9 @@
 package org.example.backend.Employee;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -31,6 +33,34 @@ public class EmployeeController {
         return  employeeService.addEmployee(employeeDTO);
 
     }
+
+    @PutMapping("{id}")
+    public Employee putEmployee(@RequestBody Employee employee, @PathVariable String id) {
+
+        return employeeService.updateEmployee(employee,id);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity <Employee> getEmployeeById(@PathVariable String id){
+        try{
+            Employee employee = employeeService.findEmployeeById(id);
+            return ResponseEntity.ok(employee);
+        } catch (NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+
+        }
+
+
+        }
+
+    @DeleteMapping("{id}")
+    public void deleteEmployeeById(@PathVariable String id){
+
+        employeeService.deleteEmployeeById(id);
+
+    }
+
+
 
 
 
