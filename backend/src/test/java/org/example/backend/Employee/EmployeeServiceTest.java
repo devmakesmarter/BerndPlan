@@ -109,7 +109,20 @@ class EmployeeServiceTest {
         //THEN
 
         verify(mockTestRepo).findById(id);
+    }
 
+    @Test
+    void deleteEmployee_shouldReturnNothing(){
+        EmployeeRepo mockTestRepo = mock(EmployeeRepo.class);
+        EmployeeIdService mockTestIdService = mock(EmployeeIdService.class);
+        EmployeeService testEmployeeService = new EmployeeService(mockTestRepo, mockTestIdService);
+
+        String id = "1";
+        doNothing().when(mockTestRepo).deleteById(id);
+
+        testEmployeeService.deleteEmployeeById(id);
+
+        verify(mockTestRepo).deleteById(id);
 
     }
 

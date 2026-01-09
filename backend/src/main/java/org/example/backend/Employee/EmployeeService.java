@@ -44,6 +44,11 @@ public class EmployeeService {
         return employeeFindById;
     }
 
+    public void deleteEmployeeById(String id){
+
+        employeeRepo.deleteById(id);
+    }
+
 
 
 

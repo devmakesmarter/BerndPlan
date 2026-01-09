@@ -128,15 +128,28 @@ class EmployeeControllerTest {
         //Given
 
         //When
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/45"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/46"))
                 //Then
                 .andExpect(status().isNotFound());
     }
 
 
 
+    @Test
+    @DirtiesContext
+    void deleteEmployeeById() throws Exception{
+        //Given
+        Employee testEmployee = new Employee("A","B",ExecutiveOrEmployee.EMPLOYEE,EmployeeProfession.APOTHEKER, LocalDate.of(1980,01,01),"45");
+        employeeRepo.save(testEmployee);
+
+        //When
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/46"))
+                .andExpect(status().isOk());
+
+        //Then
 
 
+    }
 
 
 }
