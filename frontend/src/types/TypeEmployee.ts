@@ -21,3 +21,12 @@ export type EmployeeToAdd ={
     employeeProfession: string,
     birthDate: string
 }
+
+export type EmployeeToAddWithId ={
+    firstName: string,
+    lastName: string,
+    executiveOrEmployee: string,
+    employeeProfession: string,
+    birthDate: string,
+    id:string
+}

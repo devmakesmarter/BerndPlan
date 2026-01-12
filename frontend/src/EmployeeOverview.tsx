@@ -4,38 +4,34 @@ import {useEffect, useState} from "react";
 import EmployeeCard from "./EmployeeCard.tsx";
 
 import EmployeeAddCard from "./EmployeeAddCard.tsx";
+import {useNavigate} from "react-router-dom";
+
+type EmployOverviewProps = {
+    employees: TypeEmployee[],
+    getAllEmployees: () => void
+}
+
+export default function EmployeeOverview(props: EmployOverviewProps){
 
 
 
-export default function EmployeeOverview(){
+const navigate = useNavigate()
 
-    const [employees, setEmployees] = useState<TypeEmployee[]>([])
-
-
-
-    function getAllEmployees(){
-        axios.get("/api/all")
-            .then(response => {setEmployees(response.data)
-                console.log("Anfrage ist raus ")})
-    }
-
-    useEffect(()=>{
-        getAllEmployees()
-
-    },[])
 
     return(
         <>
             <div className="mainContianer bg-gray-200">
 
             <div className="flex gap-4 ">
-                {employees.map(e => <EmployeeCard reload={getAllEmployees} key={e.id} id={e.id} firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
+                {props.employees.map(e => <EmployeeCard reload={props.getAllEmployees} key={e.id} id={e.id} firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
+            </div>
+                <div>
+                    <button onClick={() => navigate("/employeeadd")}>Hinzufügen</button>
+                </div>
             </div>
 
-            <div className={"m-2"}>
-               <EmployeeAddCard/>
-            </div>
-            </div>
+
+
         </>
     )
 }

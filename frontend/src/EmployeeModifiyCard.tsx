@@ -1,47 +1,91 @@
-import {type FormEvent, useState} from "react";
+import {type FormEvent, useEffect, useState} from "react";
 import axios from "axios";
-import type {EmployeeToAdd} from "./types/TypeEmployee.ts";
+import type {EmployeeToAddWithId} from "./types/TypeEmployee.ts";
+import {useNavigate, useParams} from "react-router-dom";
 
-type EmployeeAddCardProps = {
-    reload: () => void;
+
+
+type EmployeeModifiyProps = {
+    getAllEmployees: () => void
 }
 
-export default function EmployeeAddCard(props: EmployeeAddCardProps){
+
+
+export default function EmployeeModifiyCard(props: EmployeeModifiyProps){
+
+    const params = useParams()
+    const navigate = useNavigate()
 
     const [firstName, setFirstName] = useState<string>("")
     const [lastName, setLastName] = useState<string>("")
     const [executiveOrEmployee, setExecutiveOrEmployee] = useState<string>("EXECUTIVE")
     const [employeeProfession, setEmployeeProfession] =  useState<string>("APOTHEKER")
-    const [employeeToAdd, setEmployeeToAdd] = useState<EmployeeToAdd>()
     const [birthDate, setBirthDate] = useState<string>("")
+    const [id, setId] = useState<string>("")
 
 
-    function handleSubmit(event:FormEvent<HTMLFormElement> ){
+
+    const url = params.id
+    useEffect(() => {
+
+
+
+
+        axios.get(`/api/${url}`)
+            .then((response) => {
+                const emp = response.data
+                setFirstName(emp.firstName ?? "")
+                setLastName(emp.lastName ?? "")
+                setExecutiveOrEmployee(emp.executiveOrEmployee ?? "EXECUTIVE")
+                setEmployeeProfession(emp.employeeProfession ?? "APOTHEKER")
+                setBirthDate(emp.birthDate ?? "")
+                setId(emp.id ?? url)
+            })
+            .catch(console.error)
+
+
+    },[url])
+
+
+
+
+    function handleSave(event:FormEvent<HTMLFormElement> ){
         event.preventDefault()
-        const toPost:EmployeeToAdd ={
+        const toPost:EmployeeToAddWithId ={
             firstName,
             lastName,
             executiveOrEmployee,
             employeeProfession,
-            birthDate
+            birthDate,
+            id
         }
         console.log(toPost)
-        axios.post("/api/add", toPost)
-            .then(() => {props.reload();setBirthDate("");})
-       // window.alert(`Folgendes Objekt wurde gespeichert:/n${JSON.stringify(toPost,null,2)}`)
-        ;
+        axios.put(`/api/${id}`,toPost)
+            console.log("Put ist gemacht")
+
+
+
+        props.getAllEmployees()
+        navigate(`/`)
     }
+
+    function handleBack(){
+        navigate(`/`)
+
+    }
+
+
 
 
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="bg-gray-400">
+            <form onSubmit={handleSave} className="bg-gray-400">
                 <label> Vorname:
-                    <input placeholder={"Bitte Vornmane eintragen"} onChange={(e) => {setFirstName(e.target.value);console.log(firstName);}} />
+                    <input value={firstName} placeholder={"Bitte Vornmane eintragen"} onChange={(e) => {setFirstName(e.target.value);console.log(firstName);}} />
                 </label>
                 <label> Nachname:
-                    <input placeholder={"Bitte Nachnamen eintragen"} onChange={(e) =>  {setLastName(e.target.value)} }/>
+                    <input value={lastName} placeholder={"Bitte Nachnamen eintragen"} onChange={(e) =>  {setLastName(e.target.value)} }/>
                 </label>
                 <label> Führungskraft:
                     <select value={executiveOrEmployee} onChange={(e) => setExecutiveOrEmployee(e.target.value)}>
@@ -61,7 +105,8 @@ export default function EmployeeAddCard(props: EmployeeAddCardProps){
                 <label> Geburtsdatum:
                     <input value={birthDate} type={"date"} min={"1920-01-01"}  placeholder={"tt.mm.jjjj"} onChange={(e) => setBirthDate(e.target.value) } />
                 </label>
-                <button type={"submit"} >Absenden</button>
+                <button type={"submit"}  >Speichern</button>
+                <button onClick={handleBack}  >Zurück</button>
             </form>
 
         </>

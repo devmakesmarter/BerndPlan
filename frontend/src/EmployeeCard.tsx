@@ -1,23 +1,31 @@
 import type {TypeEmployee} from "./types/TypeEmployee.ts";
 import employeeImage from "./assets/pictureForEmployee.jpg";
-import {useState} from "react";
+
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 type EmployeeCardProps = TypeEmployee & {
     reload: () => void;
 };
 
 
-
 export default function EmployeeCard(props: EmployeeCardProps){
+    const id = props.id
+    const navigate = useNavigate()
+
 
 
     function handleDelete(){
-        const id = props.id
+
         axios.delete(`/api/${id}`)
-            .then(()=> window.alert(`${id}`))
+            .then(() => {props.reload()})
+    }
+
+    function handleToGiveId(){
+        navigate(`/detail/${id}`)
 
     }
+
 
 
 
@@ -33,7 +41,7 @@ export default function EmployeeCard(props: EmployeeCardProps){
                             <p>{props.age}</p>
                         </div>
                         <h5>{props.employeeProfession} - {props.executiveOrEmployee}</h5>
-                        <button>Bearbeiten</button>
+                        <button onClick={handleToGiveId} id={id} >Bearbeiten</button>
                         <button onClick={handleDelete} id={props.id}> Löschen</button>
                     </div>
 
