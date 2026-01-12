@@ -13,7 +13,7 @@ function App() {
         <div>
             <EmployeeOverview/>
         </div>
-      <h1>Vite + React</h1>
+
 
     </>
   )

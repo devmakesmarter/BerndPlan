@@ -26,6 +26,8 @@ export default function EmployeeAddCard(){
         window.alert(`Folgendes Objekt wurde gespeichert:/n${JSON.stringify(toPost,null,2)}`)
     }
 
+
+
     return (
         <>
             <form onSubmit={handleSubmit} className="bg-gray-400">
@@ -55,7 +57,7 @@ export default function EmployeeAddCard(){
                 </label>
                 <button type={"submit"} onClick={handleSubmit}>Absenden</button>
             </form>
-        <div>EmployeeAddCard</div>
+
         </>
 
     )

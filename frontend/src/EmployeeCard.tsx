@@ -1,12 +1,28 @@
 import type {TypeEmployee} from "./types/TypeEmployee.ts";
 import employeeImage from "./assets/pictureForEmployee.jpg";
+import {useState} from "react";
+import axios from "axios";
 
 export default function EmployeeCard(props: TypeEmployee){
 
 
+
+    function handleDelete(){
+        const id = props.id
+        axios.delete(`api/${id}`)
+            .then(()=> window.alert(`${id}`))
+
+
+
+
+
+    }
+
+
+
         return(
             <>
-                <div className="bg-red-400 w-60 p-2 bg-gray-400 rounded-lg" >
+                <div className=" w-60 p-2 bg-gray-400 rounded-lg" >
                     <div className="img_for_employee bg-blue-500">
                         <img src={employeeImage}  />
                     </div>
@@ -17,6 +33,7 @@ export default function EmployeeCard(props: TypeEmployee){
                         </div>
                         <h5>{props.employeeProfession} - {props.executiveOrEmployee}</h5>
                         <button>Bearbeiten</button>
+                        <button onClick={handleDelete} id={props.id}> Löschen</button>
                     </div>
 
                 </div>
