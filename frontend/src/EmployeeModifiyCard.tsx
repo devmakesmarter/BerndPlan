@@ -61,11 +61,12 @@ export default function EmployeeModifiyCard(props: EmployeeModifiyProps){
         }
         console.log(toPost)
         axios.put(`/api/${id}`,toPost)
-            console.log("Put ist gemacht")
+            .then(()=> {props.getAllEmployees()})
+        console.log("Put ist gemacht")
 
 
 
-        props.getAllEmployees()
+        //props.getAllEmployees()
         navigate(`/`)
     }
 

@@ -1,6 +1,7 @@
 import {type FormEvent, useState} from "react";
 import axios from "axios";
 import type {EmployeeToAdd} from "./types/TypeEmployee.ts";
+import {useNavigate} from "react-router-dom";
 
 type EmployeeAddCardProps = {
     reload: () => void;
@@ -8,6 +9,7 @@ type EmployeeAddCardProps = {
 
 export default function EmployeeAddCard(props: EmployeeAddCardProps){
 
+    const navigate = useNavigate()
     const [firstName, setFirstName] = useState<string>("")
     const [lastName, setLastName] = useState<string>("")
     const [executiveOrEmployee, setExecutiveOrEmployee] = useState<string>("EXECUTIVE")
@@ -27,9 +29,11 @@ export default function EmployeeAddCard(props: EmployeeAddCardProps){
         }
         console.log(toPost)
         axios.post("/api/add", toPost)
-            .then(() => {props.reload();setBirthDate("");})
+            .then(() => {props.reload()})
        // window.alert(`Folgendes Objekt wurde gespeichert:/n${JSON.stringify(toPost,null,2)}`)
-        ;
+
+        navigate(`/`)
+
     }
 
 
