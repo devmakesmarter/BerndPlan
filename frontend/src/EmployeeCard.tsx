@@ -3,18 +3,19 @@ import employeeImage from "./assets/pictureForEmployee.jpg";
 import {useState} from "react";
 import axios from "axios";
 
-export default function EmployeeCard(props: TypeEmployee){
+type EmployeeCardProps = TypeEmployee & {
+    reload: () => void;
+};
 
+
+
+export default function EmployeeCard(props: EmployeeCardProps){
 
 
     function handleDelete(){
         const id = props.id
-        axios.delete(`api/${id}`)
+        axios.delete(`/api/${id}`)
             .then(()=> window.alert(`${id}`))
-
-
-
-
 
     }
 

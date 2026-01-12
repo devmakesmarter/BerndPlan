@@ -11,6 +11,8 @@ export default function EmployeeOverview(){
 
     const [employees, setEmployees] = useState<TypeEmployee[]>([])
 
+
+
     function getAllEmployees(){
         axios.get("/api/all")
             .then(response => {setEmployees(response.data)
@@ -27,7 +29,7 @@ export default function EmployeeOverview(){
             <div className="mainContianer bg-gray-200">
 
             <div className="flex gap-4 ">
-                {employees.map(e => <EmployeeCard key={e.id} id={e.id} firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
+                {employees.map(e => <EmployeeCard reload={getAllEmployees} key={e.id} id={e.id} firstName={e.firstName} lastName={e.lastName} age={e.age} executiveOrEmployee={e.executiveOrEmployee} employeeProfession={e.employeeProfession} birthDate={e.birthDate}/>)}
             </div>
 
             <div className={"m-2"}>
