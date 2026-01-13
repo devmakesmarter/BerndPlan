@@ -14,7 +14,6 @@ export default function EmployeeAddCard(props: EmployeeAddCardProps){
     const [lastName, setLastName] = useState<string>("")
     const [executiveOrEmployee, setExecutiveOrEmployee] = useState<string>("EXECUTIVE")
     const [employeeProfession, setEmployeeProfession] =  useState<string>("APOTHEKER")
-    const [employeeToAdd, setEmployeeToAdd] = useState<EmployeeToAdd>()
     const [birthDate, setBirthDate] = useState<string>("")
 
 
@@ -32,6 +31,12 @@ export default function EmployeeAddCard(props: EmployeeAddCardProps){
             .then(() => {props.reload()})
        // window.alert(`Folgendes Objekt wurde gespeichert:/n${JSON.stringify(toPost,null,2)}`)
 
+        navigate(`/`)
+
+    }
+
+    function handleBack(event: React.MouseEvent<HTMLButtonElement>){
+        event.preventDefault()
         navigate(`/`)
 
     }
@@ -65,7 +70,8 @@ export default function EmployeeAddCard(props: EmployeeAddCardProps){
                 <label> Geburtsdatum:
                     <input value={birthDate} type={"date"} min={"1920-01-01"}  placeholder={"tt.mm.jjjj"} onChange={(e) => setBirthDate(e.target.value) } />
                 </label>
-                <button type={"submit"} >Absenden</button>
+                <button type={"submit"} >Hinzufügen</button>
+                <button type={"button"} onClick={handleBack} >Zurückk</button>
             </form>
 
         </>

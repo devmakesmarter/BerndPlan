@@ -70,7 +70,8 @@ export default function EmployeeModifiyCard(props: EmployeeModifiyProps){
         navigate(`/`)
     }
 
-    function handleBack(){
+    function handleBack(event: React.MouseEvent<HTMLButtonElement>){
+        event.preventDefault()
         navigate(`/`)
 
     }
@@ -107,7 +108,7 @@ export default function EmployeeModifiyCard(props: EmployeeModifiyProps){
                     <input value={birthDate} type={"date"} min={"1920-01-01"}  placeholder={"tt.mm.jjjj"} onChange={(e) => setBirthDate(e.target.value) } />
                 </label>
                 <button type={"submit"}  >Speichern</button>
-                <button onClick={handleBack}  >Zurück</button>
+                <button type={"button"} onClick={handleBack}  >Zurück</button>
             </form>
 
         </>

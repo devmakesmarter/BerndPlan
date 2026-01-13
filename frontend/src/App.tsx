@@ -2,7 +2,7 @@
 
 import './App.css'
 import EmployeeOverview from "./EmployeeOverview.tsx";
-import {Route, Router, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import EmployeeModifiyCard from "./EmployeeModifiyCard.tsx";
 import EmployeeAddCard from "./EmployeeAddCard.tsx";
 import {useEffect, useState} from "react";
